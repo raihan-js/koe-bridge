@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 
@@ -32,7 +33,7 @@ class SBV2JA:
         if net is not None:
             net.float()
 
-    def synth(self, text: str) -> dict:
+    def synth(self, text: str) -> dict[str, Any]:
         import time
 
         t0 = time.monotonic()
@@ -47,15 +48,17 @@ class KokoroEN:
         self.voice = voice
         self.pipe = None
 
-    def synth(self, text: str) -> dict:
+    def synth(self, text: str) -> dict[str, Any]:
         import time
 
         if self.pipe is None:
             from kokoro import KPipeline
 
             self.pipe = KPipeline(lang_code="a")
+        pipe = self.pipe
+        assert pipe is not None
         t0 = time.monotonic()
-        chunks = list(self.pipe(text, voice=self.voice))
+        chunks = list(pipe(text, voice=self.voice))
         sr, parts = 24000, []
         for _, _, audio in chunks:
             parts.append(audio.numpy() if hasattr(audio, "numpy") else np.asarray(audio))

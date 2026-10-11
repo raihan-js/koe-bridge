@@ -1,0 +1,26 @@
+{
+  "ja_jp": {
+    "n": 200,
+    "asr_wer": 0.95,
+    "asr_s_per_item": 0.379,
+    "mt_bleu_cascade": 10.52,
+    "mt_bleu_clean": 18.07,
+    "mt_chrf": 36.97,
+    "mt_s_per_item": 1.273,
+    "tts_s_per_item": 0.17,
+    "roundtrip_wer": 0.1175,
+    "n_mt_pairs": 200
+  },
+  "en_us": {
+    "n": 200,
+    "asr_wer": 0.1044,
+    "asr_s_per_item": 0.317,
+    "mt_bleu_cascade": 0.25,
+    "mt_bleu_clean": 0.32,
+    "mt_chrf": 20.91,
+    "mt_s_per_item": 0.352,
+    "tts_s_per_item": 0.232,
+    "roundtrip_wer": 1.1,
+    "n_mt_pairs": 186
+  }
+}

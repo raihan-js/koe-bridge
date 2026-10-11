@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 import numpy as np
+import numpy.typing as npt
 
 
 class ASR:
@@ -14,7 +17,7 @@ class ASR:
         except Exception:  # noqa: BLE001 - fall back to CPU
             self.m = WhisperModel(model, device="cpu", compute_type="int8")
 
-    def transcribe(self, wav: np.ndarray, sr: int, lang: str) -> dict:
+    def transcribe(self, wav: npt.NDArray[np.float64], sr: int, lang: str) -> dict[str, Any]:
         import time
 
         t0 = time.monotonic()

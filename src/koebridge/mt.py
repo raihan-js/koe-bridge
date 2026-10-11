@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 
 class MT:
     def __init__(self, model_id: str, device: int = -1):
@@ -10,12 +12,11 @@ class MT:
         self.tok = MarianTokenizer.from_pretrained(model_id)
         self.m = MarianMTModel.from_pretrained(model_id)
         if device >= 0:
-            import torch
 
             self.m = self.m.to(f"cuda:{device}").eval()
         self.device = device
 
-    def translate(self, texts: list[str], batch: int = 16) -> dict:
+    def translate(self, texts: list[str], batch: int = 16) -> dict[str, Any]:
         import time
 
         t0 = time.monotonic()

@@ -6,6 +6,8 @@ documented in docs/decisions.md), and as the LLM-vs-NMT comparison arm.
 
 from __future__ import annotations
 
+from typing import Any
+
 
 class LLMTranslator:
     def __init__(self, model_id: str, device: int = 0):
@@ -19,7 +21,7 @@ class LLMTranslator:
             device_map=f"cuda:{device}" if device >= 0 else "cpu").eval()
         self.device = device
 
-    def translate(self, texts: list[str], src: str, tgt: str, batch: int = 4) -> dict:
+    def translate(self, texts: list[str], src: str, tgt: str, batch: int = 4) -> dict[str, Any]:
         import time
 
         import torch

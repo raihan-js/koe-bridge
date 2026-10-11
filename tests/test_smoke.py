@@ -1,5 +1,4 @@
 """Smoke tests (no models — interface only)."""
-import numpy as np
 
 
 def test_wer_math():
