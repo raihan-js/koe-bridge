@@ -24,7 +24,7 @@ class SBV2JA:
         for _m in getattr(bert_models, "__loaded_models").values():
             _m.float()
         mp = base / "sbv2" / "jvnv-F1-jp"
-        self.m = TTSModel(model_path=mp / "jvnv-F1-jp_e160_s14000.safetensors",
+        self.m: Any = TTSModel(model_path=mp / "jvnv-F1-jp_e160_s14000.safetensors",
                           config_path=mp / "config.json",
                           style_vec_path=np.load(mp / "style_vectors.npy"),
                           device="cuda" if torch.cuda.is_available() else "cpu")
@@ -46,7 +46,7 @@ class KokoroEN:
 
     def __init__(self, voice: str = "af_heart"):
         self.voice = voice
-        self.pipe = None
+        self.pipe: Any = None
 
     def synth(self, text: str) -> dict[str, Any]:
         import time

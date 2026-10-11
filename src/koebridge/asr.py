@@ -13,7 +13,7 @@ class ASR:
         from faster_whisper import WhisperModel
 
         try:
-            self.m = WhisperModel(model, device=device, compute_type=compute)
+            self.m: Any = WhisperModel(model, device=device, compute_type=compute)
         except Exception:  # noqa: BLE001 - fall back to CPU
             self.m = WhisperModel(model, device="cpu", compute_type="int8")
 

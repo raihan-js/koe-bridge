@@ -10,7 +10,7 @@ class MT:
         from transformers import MarianMTModel, MarianTokenizer
 
         self.tok = MarianTokenizer.from_pretrained(model_id)
-        self.m = MarianMTModel.from_pretrained(model_id)
+        self.m: Any = MarianMTModel.from_pretrained(model_id)
         if device >= 0:
 
             self.m = self.m.to(f"cuda:{device}").eval()
