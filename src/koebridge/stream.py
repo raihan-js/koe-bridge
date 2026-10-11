@@ -13,8 +13,11 @@ class VAD:
         import torch
 
         self.thresh = thresh
-        loaded: Any = torch.hub.load(  # type: ignore[no-untyped-call]
-            "snakers4/silero-vad", "silero_vad", force_reload=False, trust_repo=True)
+        # getattr: torch.hub.load is untyped in some torch builds (no-untyped-call
+        # under strict) and typed in others (unused-ignore) — Any call pleases both.
+        hub_load: Any = torch.hub.load
+        loaded: Any = hub_load("snakers4/silero-vad", "silero_vad",
+                               force_reload=False, trust_repo=True)
         model, _ = loaded
         model.eval()
         with torch.no_grad():  # warmup: first forward differs (JIT/state init)

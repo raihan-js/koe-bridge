@@ -15,10 +15,12 @@ class LLMTranslator:
         from transformers import AutoModelForCausalLM, AutoTokenizer
 
         self.tok = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
-        self.m: Any = AutoModelForCausalLM.from_pretrained(
+        m: Any = AutoModelForCausalLM.from_pretrained(
             model_id, trust_remote_code=True,
             torch_dtype=torch.float16 if device >= 0 else torch.float32,
-            device_map=f"cuda:{device}" if device >= 0 else "cpu").eval()
+            device_map=f"cuda:{device}" if device >= 0 else "cpu")
+        m.eval()
+        self.m = m
         self.device = device
 
     def translate(self, texts: list[str], src: str, tgt: str, batch: int = 4) -> dict[str, Any]:
