@@ -12,12 +12,21 @@ class VAD:
     def __init__(self, thresh: float = 0.5):
         import torch
 
+        self.thresh = thresh
         loaded: Any = torch.hub.load(  # type: ignore[no-untyped-call]
             "snakers4/silero-vad", "silero_vad", force_reload=False, trust_repo=True)
         model, _ = loaded
         model.eval()
+        with torch.no_grad():  # warmup: first forward differs (JIT/state init)
+            model(torch.zeros(512), 16000)
+            model.reset_states()
         self.m = model
-        self.thresh = thresh
+
+    def reset(self) -> None:
+        """Reset RNN hidden state. MUST be called between unrelated utterances —
+        the silero model otherwise carries state across files (non-deterministic
+        segmentation across runs)."""
+        self.m.reset_states()
 
     def is_speech(self, chunk_16k: npt.NDArray[np.float64]) -> bool:
         import torch
@@ -30,7 +39,8 @@ class VAD:
             if len(w) < 512:
                 w = np.pad(w, (0, 512 - len(w)))
             with torch.no_grad():
-                best = max(best, float(self.m(torch.from_numpy(w), 16000).item()))
+                p: Any = self.m(torch.from_numpy(w), 16000)
+                best = max(best, float(p.item()))
         return best >= self.thresh
 
 
@@ -44,6 +54,9 @@ class Chunker:
         self.max_seg_s = max_seg_s
 
     def segment(self, wav: npt.NDArray[np.float64], sr: int, vad: Any = None) -> list[tuple[float, float]]:
+        """Split into speech segments. Resets stateful VAD (RNN state) per file."""
+        if vad is not None and hasattr(vad, "reset"):
+            vad.reset()
         n_chunk = int(self.chunk_s * sr)
         flags = []
         for i in range(0, len(wav), n_chunk):
@@ -70,7 +83,7 @@ class Chunker:
 
 def _to16k(c: npt.NDArray[np.float64], sr: int) -> npt.NDArray[np.float64]:
     if sr == 16000:
-        return np.asarray(c, dtype=np.float32)
+        return np.asarray(c, dtype=np.float64)
     from math import gcd
 
     from scipy.signal import resample_poly

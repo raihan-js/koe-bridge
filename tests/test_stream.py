@@ -37,3 +37,18 @@ def test_pipeline_lag_math():
     assert abs(r["first_audio_lag_s"] - 7.0) < 1e-9
     s = summarize([r, r])
     assert s["p50_lag_s"] == 7.0 and s["n"] == 2
+
+
+def test_segment_resets_stateful_vad(tmp_state=None):
+    """Regression: silero VAD carries RNN state; segment() must reset per file."""
+    import sys
+
+    from koebridge.stream import VAD, Chunker
+    sys.path.insert(0, "scripts")
+    from run_m1 import load_wav, read_fleurs
+    vad = VAD()
+    r = read_fleurs("en_us", 1)[0]
+    sr, y = load_wav(f"data/fleurs/audio/test/{r['file']}")
+    a = Chunker().segment(y, sr, vad)
+    b = Chunker().segment(y, sr, vad)
+    assert a == b

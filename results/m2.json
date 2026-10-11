@@ -1,8 +1,8 @@
 {
   "ja_jp": {
     "n": 20,
-    "p50_lag_s": 1.83,
-    "p95_lag_s": 3.61,
+    "p50_lag_s": 1.86,
+    "p95_lag_s": 3.32,
     "runs": [
       {
         "segments": [
@@ -11,7 +11,7 @@
             8.5
           ]
         ],
-        "first_audio_lag_s": 1.82613667298574,
+        "first_audio_lag_s": 1.8171678250073455,
         "n_segments": 1
       },
       {
@@ -21,29 +21,25 @@
             22.0
           ]
         ],
-        "first_audio_lag_s": 3.1602607650129357,
+        "first_audio_lag_s": 3.090802136983257,
         "n_segments": 1
       },
       {
         "segments": [
           [
-            0.0,
-            0.5
-          ],
-          [
             2.0,
             10.0
           ]
         ],
-        "first_audio_lag_s": 0.7856454199936707,
-        "n_segments": 2
+        "first_audio_lag_s": 1.7029937180050183,
+        "n_segments": 1
       }
     ]
   },
   "en_us": {
     "n": 20,
-    "p50_lag_s": 1.12,
-    "p95_lag_s": 2.29,
+    "p50_lag_s": 1.26,
+    "p95_lag_s": 2.22,
     "runs": [
       {
         "segments": [
@@ -56,17 +52,17 @@
             10.0
           ]
         ],
-        "first_audio_lag_s": 2.8463435630110325,
+        "first_audio_lag_s": 2.7677080600115005,
         "n_segments": 2
       },
       {
         "segments": [
           [
-            0.5,
+            1.0,
             5.5
           ]
         ],
-        "first_audio_lag_s": 0.8094530140078859,
+        "first_audio_lag_s": 0.9810173680016305,
         "n_segments": 1
       },
       {
@@ -76,7 +72,7 @@
             12.0
           ]
         ],
-        "first_audio_lag_s": 1.8833742779970635,
+        "first_audio_lag_s": 1.8371533830068074,
         "n_segments": 1
       }
     ]
