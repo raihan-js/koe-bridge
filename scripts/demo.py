@@ -10,9 +10,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
-from run_m1 import read_fleurs, load_wav  # noqa: E402
-from koebridge.stream import VAD, Chunker  # noqa: E402
-from koebridge.pipeline import run_streaming  # noqa: E402
+from run_m1 import load_wav, read_fleurs
+
+from koebridge.pipeline import run_streaming
+from koebridge.stream import VAD
 
 
 def main() -> None:
@@ -31,12 +32,12 @@ def main() -> None:
         from koebridge.mt import MT
         mt_b = MT("data/mt/opus-mt-ja-en")
         tts = KokoroEN()
-        mt_fn = lambda texts: mt_b.translate([f">>en<< {t}" for t in texts])  # noqa: E731
+        mt_fn = lambda texts: mt_b.translate([f">>en<< {t}" for t in texts])
     else:
         from koebridge.llm_mt import LLMTranslator
         mt_b = LLMTranslator("data/mt/qwen2.5-1.5b-instruct", device=0)
         tts = SBV2JA()
-        mt_fn = lambda texts: mt_b.translate(texts, "English", "Japanese")  # noqa: E731
+        mt_fn = lambda texts: mt_b.translate(texts, "English", "Japanese")
     vad = VAD()
     alang = "ja" if lang == "ja_jp" else "en"
     t0 = time.monotonic()
