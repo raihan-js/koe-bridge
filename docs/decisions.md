@@ -18,3 +18,17 @@
 - Venv pins (learned): numpy==1.26.4 (pyopenjtalk ABI), pyarrow==17.0.0 +
   datasets==3.6.0 (datasets 5 needs pyarrow 24), transformers 4.48.3
   (v5 dropped translation pipelines), sacremoses installed.
+
+## 2026-10-11 — M2/M3 + pipeline-convention fix
+- Silero VAD (torch.hub) carries RNN hidden state across forward calls:
+  same file segmented 0.87 then 0.98; files scored 0.0 speech kept in one
+  process, 0.5+ in another. Fix: warmup forward at load + reset_states()
+  per file (test_segment_resets_stateful_vad). M2 re-ran after fix.
+- Pipeline calling convention is canonical: Qwen with full language names
+  ("English"->"Japanese", in the system prompt), opus ja->en with `>>en<<`
+  prefix. run_m3/demo initially used "en"/"ja" + no prefix; realigned and
+  re-ran (numbers changed materially). Lesson: one helper for backend
+  construction shared by M1/M2/M3/demo (deferred; conventions documented).
+- M3 JA arm first ran with word-split prefixes: Japanese has no spaces, so
+  every prefix == full sentence (survival 0.978, invalid). Fixed with
+  character prefixes; bogus arm deleted and re-run.

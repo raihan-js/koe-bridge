@@ -38,16 +38,18 @@ def main() -> None:
     out = Path("results/m3.json")
     allres: dict = json.loads(out.read_text()) if out.exists() else {}
     rows = read_fleurs(lang, 100)
+    # Canonical pipeline calling convention (must match run_m1/run_m2):
+    # Qwen with full language names, opus with the >>en<< prefix.
     if lang == "en_us":
         backend = LLMTranslator("data/mt/qwen2.5-1.5b-instruct", device=0)
 
         def mt(texts: list[str]) -> list[str]:
-            return backend.translate(texts, "en", "ja")["texts"]
+            return backend.translate(texts, "English", "Japanese")["texts"]
     else:
         backend = MT("data/mt/opus-mt-ja-en")
 
         def mt(texts: list[str]) -> list[str]:
-            return backend.translate(texts)["texts"]
+            return backend.translate([f">>en<< {t}" for t in texts])["texts"]
     agg: dict[str, list[float]] = {str(f): [] for f in FRACS}
     t0 = time.time()
     for i, r in enumerate(rows):

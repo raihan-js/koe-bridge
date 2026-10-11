@@ -3,9 +3,9 @@
     "n": 100,
     "source": "reference transcripts (no ASR error)",
     "mean_survival": {
-      "0.25": 0.005,
-      "0.5": 0.005,
-      "0.75": 0.014,
+      "0.25": 0.007,
+      "0.5": 0.014,
+      "0.75": 0.02,
       "1.0": 1.0
     }
   },
@@ -13,20 +13,20 @@
     "n": 100,
     "source": "reference transcripts (no ASR error)",
     "mean_survival": {
-      "0.25": 0.099,
-      "0.5": 0.13,
-      "0.75": 0.155,
+      "0.25": 0.077,
+      "0.5": 0.088,
+      "0.75": 0.132,
       "1.0": 1.0
     }
   },
   "ja_jp_qwen": {
     "n": 100,
     "source": "reference transcripts (no ASR error)",
-    "note": "same-backend control: Qwen ja->en",
+    "note": "same-backend control: Qwen ja->en (non-canonical; pipeline uses opus)",
     "mean_survival": {
-      "0.25": 0.114,
-      "0.5": 0.173,
-      "0.75": 0.181,
+      "0.25": 0.134,
+      "0.5": 0.184,
+      "0.75": 0.204,
       "1.0": 1.0
     }
   }
