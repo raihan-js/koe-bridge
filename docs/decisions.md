@@ -32,3 +32,17 @@
 - M3 JA arm first ran with word-split prefixes: Japanese has no spaces, so
   every prefix == full sentence (survival 0.978, invalid). Fixed with
   character prefixes; bogus arm deleted and re-run.
+
+## 2026-10-11 — negation-polarity study (results/neg.json)
+- Mined FLEURS test for negation (138 ja / 94 en rows, deduped to 40+40):
+  regex mining overmatches lexical ない-adjectives (数少ない="few" is not
+  negation) — excluded 少ない/危ない/汚い, limitation noted.
+- Prefix polarity flips fall 0.70→0.28 (ja→en) / 0.73→0.23 (en→ja) from 10%
+  to 90% prefixes; median first-correct-polarity at 30% both directions;
+  affirm-then-negate 0.65/0.70. NO directional asymmetry (unlike M3).
+- Worst finding: full-sentence translations LOSE explicit negation markers
+  22-25% of the time (lower bound; classifier misses paraphrases like 否定).
+  Example: "He did not set a figure" → 決定されるだろう (affirmative).
+- Backend contrast: opus on fragments hallucinates ("It's a dead end",
+  "(Music)", "(Laughter)"); Qwen degrades gracefully (coherent partials,
+  "彼はなかった" weirdness aside). Matters for retranslation deployment.

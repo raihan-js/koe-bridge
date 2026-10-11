@@ -1,0 +1,40 @@
+{
+  "ja_jp": {
+    "n": 40,
+    "source": "FLEURS test transcripts containing negation (deduped)",
+    "full_neg_rate": 0.775,
+    "flip_rate": {
+      "0.1": 0.7,
+      "0.2": 0.65,
+      "0.3": 0.65,
+      "0.4": 0.625,
+      "0.5": 0.475,
+      "0.6": 0.45,
+      "0.7": 0.4,
+      "0.8": 0.35,
+      "0.9": 0.275,
+      "1.0": 0.0
+    },
+    "median_first_correct_frac": 0.3,
+    "affirm_then_negate_rate": 0.65
+  },
+  "en_us": {
+    "n": 40,
+    "source": "FLEURS test transcripts containing negation (deduped)",
+    "full_neg_rate": 0.75,
+    "flip_rate": {
+      "0.1": 0.725,
+      "0.2": 0.575,
+      "0.3": 0.525,
+      "0.4": 0.425,
+      "0.5": 0.375,
+      "0.6": 0.275,
+      "0.7": 0.3,
+      "0.8": 0.25,
+      "0.9": 0.225,
+      "1.0": 0.0
+    },
+    "median_first_correct_frac": 0.3,
+    "affirm_then_negate_rate": 0.7
+  }
+}
