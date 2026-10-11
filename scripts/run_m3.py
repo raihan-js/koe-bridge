@@ -15,9 +15,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
-from run_m1 import read_fleurs  # noqa: E402
-from koebridge.llm_mt import LLMTranslator  # noqa: E402
-from koebridge.mt import MT  # noqa: E402
+from run_m1 import read_fleurs
+
+from koebridge.llm_mt import LLMTranslator
+from koebridge.mt import MT
 
 FRACS = [0.25, 0.50, 0.75, 1.0]
 
