@@ -1,0 +1,33 @@
+{
+  "en_us": {
+    "n": 100,
+    "source": "reference transcripts (no ASR error)",
+    "mean_survival": {
+      "0.25": 0.005,
+      "0.5": 0.005,
+      "0.75": 0.014,
+      "1.0": 1.0
+    }
+  },
+  "ja_jp": {
+    "n": 100,
+    "source": "reference transcripts (no ASR error)",
+    "mean_survival": {
+      "0.25": 0.099,
+      "0.5": 0.13,
+      "0.75": 0.155,
+      "1.0": 1.0
+    }
+  },
+  "ja_jp_qwen": {
+    "n": 100,
+    "source": "reference transcripts (no ASR error)",
+    "note": "same-backend control: Qwen ja->en",
+    "mean_survival": {
+      "0.25": 0.114,
+      "0.5": 0.173,
+      "0.75": 0.181,
+      "1.0": 1.0
+    }
+  }
+}
