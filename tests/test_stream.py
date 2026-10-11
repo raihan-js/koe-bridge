@@ -1,6 +1,7 @@
 """Streaming pipeline tests (fake stages; timeline math must hold)."""
 
 import numpy as np
+import pytest
 
 from koebridge.pipeline import run_streaming, summarize
 from koebridge.stream import Chunker
@@ -41,9 +42,15 @@ def test_pipeline_lag_math():
 
 def test_segment_resets_stateful_vad(tmp_state=None):
     """Regression: silero VAD carries RNN state; segment() must reset per file."""
+    import shutil
     import sys
+    from pathlib import Path
 
-    from koebridge.stream import VAD, Chunker
+    if not Path("data/fleurs/audio/test").exists():
+        pytest.skip("needs FLEURS audio")
+    if shutil.which("ffmpeg") is None:
+        pytest.skip("needs ffmpeg")
+    from koebridge.stream import VAD
     sys.path.insert(0, "scripts")
     from run_m1 import load_wav, read_fleurs
     vad = VAD()
