@@ -50,6 +50,23 @@ Same backend (Qwen), matched 50% prefixes: 0.184 ja→en vs 0.014 en→ja
 (~13x). The SVO→SOV direction pays the wait penalty, as predicted.
 Demo: `scripts/demo.py [ja_jp|en_us] [row]` (one utterance, printed timeline).
 
+### Negation polarity (n=40/direction, `results/neg.json`)
+
+Japanese negation arrives clause-finally — translating prefixes risks
+committing to affirmative, then flipping. Mining FLEURS for negated
+sentences (deduped; lexical ない-adjectives like 数少ない excluded):
+
+| dir (backend) | flip 10%→90% | median first-correct | affirm-then-negate | full keeps negation |
+|---------------|--------------|----------------------|--------------------|---------------------|
+| ja→en (opus) | 0.70 → 0.28 | 30% of source | 0.65 | 0.78 |
+| en→ja (Qwen) | 0.73 → 0.23 | 30% of source | 0.70 | 0.75 |
+
+No directional asymmetry (unlike word-order survival). Worst finding:
+full-sentence translations lose explicit negation markers 22–25% of the
+time (lower bound) — e.g. "He did not set a figure" → 決定されるだろう
+(affirmative). Fragment behavior differs by backend: opus hallucinates
+("It's a dead end", "(Music)"), Qwen degrades gracefully.
+
 ## Reproduce
 
 ```bash
@@ -66,6 +83,9 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 - One 3s-chunk Whisper model, one VAD threshold, greedy decoding everywhere.
 - M2 is a lockstep sim, not a live streaming server (no partial-audio policy).
 - M3 uses reference transcripts; ASR noise would lower survival further.
+- Negation classifiers are regexes (validated on full translations, reported
+  as lower bounds); mining misses paraphrastic negation, overmatches some
+  lexical adjectives (documented exclusions).
 - FLEURS read speech only; no disfluencies, no negation-focus evaluation
   (the original polarity question is still open).
 - TTS voices are research-only (JSUT/JVS-derived); weights never published.

@@ -16,6 +16,7 @@ FILES = [
     "results/m1.json",
     "results/m2.json",
     "results/m3.json",
+    "results/neg.json",
 ]
 
 CARD = """---
@@ -31,6 +32,7 @@ Evaluation artifacts for [koe-bridge](https://github.com/raihan-js/koe-bridge)
 - `m1.json`: cascade audit summary (n=200/direction).
 - `m2.json`: streaming first-audio lag (n=20/direction).
 - `m3.json`: prefix-translation survival / word-order wait cost (n=100/dir).
+- `neg.json`: negation-polarity flips on prefixes (n=40/direction).
 
 Source utterances: FLEURS test set (CC-BY-4.0, Google).
 """
