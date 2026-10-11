@@ -28,7 +28,7 @@ def test_chunker_segments_on_silence():
 def test_pipeline_lag_math():
     wav = np.zeros(16000 * 4)
     vad = FakeVAD([True] * 8)
-    asr = lambda seg, sr: {"text": "hi", "latency_s": 1.0}  # noqa: E731
+    asr = lambda seg, sr: {"text": "hi", "latency_s": 1.0}
     mt = lambda texts: {"texts": texts, "latency_s": 2.0}
     tts = lambda text: {"latency_s": 4.0}
     r = run_streaming(wav, 16000, vad, asr, mt, tts, chunk_s=0.5, max_seg_s=20.0)

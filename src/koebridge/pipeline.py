@@ -8,15 +8,17 @@ it is: model+chunking latency on the critical path, not wall-clock realtime.
 
 from __future__ import annotations
 
-from typing import Any, Callable
+from collections.abc import Callable
+from typing import Any
 
 import numpy as np
+import numpy.typing as npt
 
 
-def run_streaming(wav: np.ndarray, sr: int, vad: Any,
-                  asr_fn: Callable[[np.ndarray, int], dict],
-                  mt_fn: Callable[[list[str]], dict],
-                  tts_fn: Callable[[str], dict],
+def run_streaming(wav: npt.NDArray[np.float64], sr: int, vad: Any,
+                  asr_fn: Callable[[npt.NDArray[np.float64], int], dict[str, Any]],
+                  mt_fn: Callable[[list[str]], dict[str, Any]],
+                  tts_fn: Callable[[str], dict[str, Any]],
                   chunk_s: float = 0.5, max_seg_s: float = 20.0) -> dict[str, Any]:
     from koebridge.stream import Chunker
 

@@ -5,24 +5,33 @@ from __future__ import annotations
 from typing import Any
 
 import numpy as np
+import numpy.typing as npt
 
 
 class VAD:
     def __init__(self, thresh: float = 0.5):
         import torch
 
-        model, _ = torch.hub.load("snakers4/silero-vad", "silero_vad", force_reload=False, trust_repo=True)
+        loaded: Any = torch.hub.load(  # type: ignore[no-untyped-call]
+            "snakers4/silero-vad", "silero_vad", force_reload=False, trust_repo=True)
+        model, _ = loaded
         model.eval()
         self.m = model
         self.thresh = thresh
 
-    def is_speech(self, chunk_16k: np.ndarray) -> bool:
+    def is_speech(self, chunk_16k: npt.NDArray[np.float64]) -> bool:
         import torch
 
-        x = torch.from_numpy(np.asarray(chunk_16k, dtype=np.float32))
-        with torch.no_grad():
-            p = float(self.m(x, 16000).item())
-        return p >= self.thresh
+        x = np.asarray(chunk_16k, dtype=np.float32).reshape(-1)
+        # Silero takes fixed 512-sample frames at 16kHz; max over frames.
+        best = 0.0
+        for i in range(0, max(len(x) - 511, 1), 512):
+            w = x[i:i + 512]
+            if len(w) < 512:
+                w = np.pad(w, (0, 512 - len(w)))
+            with torch.no_grad():
+                best = max(best, float(self.m(torch.from_numpy(w), 16000).item()))
+        return best >= self.thresh
 
 
 class Chunker:
@@ -34,7 +43,7 @@ class Chunker:
         self.min_silence_s = min_silence_s
         self.max_seg_s = max_seg_s
 
-    def segment(self, wav: np.ndarray, sr: int, vad: Any = None) -> list[tuple[float, float]]:
+    def segment(self, wav: npt.NDArray[np.float64], sr: int, vad: Any = None) -> list[tuple[float, float]]:
         n_chunk = int(self.chunk_s * sr)
         flags = []
         for i in range(0, len(wav), n_chunk):
@@ -44,7 +53,6 @@ class Chunker:
         start: int | None = None
         sil = 0
         for i, f in enumerate(flags):
-            t = i * self.chunk_s
             if f:
                 if start is None:
                     start = i
@@ -60,7 +68,7 @@ class Chunker:
         return segs
 
 
-def _to16k(c: np.ndarray, sr: int) -> np.ndarray:
+def _to16k(c: npt.NDArray[np.float64], sr: int) -> npt.NDArray[np.float64]:
     if sr == 16000:
         return np.asarray(c, dtype=np.float32)
     from math import gcd
@@ -68,4 +76,4 @@ def _to16k(c: np.ndarray, sr: int) -> np.ndarray:
     from scipy.signal import resample_poly
 
     g = gcd(sr, 16000)
-    return resample_poly(np.asarray(c, dtype=np.float32), 16000 // g, sr // g).astype(np.float32)
+    return np.asarray(resample_poly(np.asarray(c, dtype=np.float32), 16000 // g, sr // g), dtype=np.float64)

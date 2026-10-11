@@ -1,0 +1,57 @@
+Using cache found in /home/raihan/.cache/torch/hub/snakers4_silero-vad_master
+/home/raihan/Desktop/APPS/research-learn/koe-bridge/.venv/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/home/raihan/Desktop/APPS/research-learn/koe-bridge/.venv/lib/python3.12/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+10-11 15:18:41 |  INFO  | bert_models.py:92 | Loaded the Languages.JP BERT model from /home/raihan/Desktop/APPS/research-learn/akusento/data/sbv2-bert/deberta-v2-large-japanese-char-wwm
+10-11 15:18:41 |  INFO  | bert_models.py:154 | Loaded the Languages.JP BERT tokenizer from /home/raihan/Desktop/APPS/research-learn/akusento/data/sbv2-bert/deberta-v2-large-japanese-char-wwm
+10-11 15:18:41 |  INFO  | infer.py:24 | Using JP-Extra model
+/home/raihan/Desktop/APPS/research-learn/koe-bridge/.venv/lib/python3.12/site-packages/torch/nn/utils/weight_norm.py:145: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+10-11 15:18:42 |  INFO  | safetensors.py:50 | Loaded '/home/raihan/Desktop/APPS/research-learn/akusento/data/sbv2/jvnv-F1-jp/jvnv-F1-jp_e160_s14000.safetensors' (iteration 160)
+/home/raihan/Desktop/APPS/research-learn/koe-bridge/.venv/lib/python3.12/site-packages/torch/nn/modules/rnn.py:1011: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.2 and num_layers=1
+  super().__init__("LSTM", *args, **kwargs)
+/home/raihan/Desktop/APPS/research-learn/koe-bridge/.venv/lib/python3.12/site-packages/torch/nn/utils/weight_norm.py:145: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+/home/raihan/Desktop/APPS/research-learn/koe-bridge/.venv/lib/python3.12/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+/home/raihan/Desktop/APPS/research-learn/koe-bridge/.venv/lib/python3.12/site-packages/transformers/generation/configuration_utils.py:628: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.7` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/home/raihan/Desktop/APPS/research-learn/koe-bridge/.venv/lib/python3.12/site-packages/transformers/generation/configuration_utils.py:633: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.8` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+/home/raihan/Desktop/APPS/research-learn/koe-bridge/.venv/lib/python3.12/site-packages/transformers/generation/configuration_utils.py:650: UserWarning: `do_sample` is set to `False`. However, `top_k` is set to `20` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_k`.
+  warnings.warn(
+[32m15:19:36[0m | [36m       tts_model:259[0m | [1m    INFO[0m | [1mStart generating audio data from text:
+オーストラリアのミッチェル・ゴルウェルは男子 Standing Super Gで11位、チェコのユルドリック・デニネクは男子 Sitting Super Gで16位でした。[0m
+[32m15:19:37[0m | [36m       tts_model:324[0m | [1m    INFO[0m | [1mAudio data generated successfully[0m
+/home/raihan/Desktop/APPS/research-learn/koe-bridge/.venv/lib/python3.12/site-packages/transformers/generation/configuration_utils.py:628: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.7` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/home/raihan/Desktop/APPS/research-learn/koe-bridge/.venv/lib/python3.12/site-packages/transformers/generation/configuration_utils.py:633: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.8` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+/home/raihan/Desktop/APPS/research-learn/koe-bridge/.venv/lib/python3.12/site-packages/transformers/generation/configuration_utils.py:650: UserWarning: `do_sample` is set to `False`. However, `top_k` is set to `20` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_k`.
+  warnings.warn(
+[32m15:19:37[0m | [36m       tts_model:259[0m | [1m    INFO[0m | [1mStart generating audio data from text:
+その後、カーディフ大学病院に移動されました。[0m
+[32m15:19:38[0m | [36m       tts_model:324[0m | [1m    INFO[0m | [1mAudio data generated successfully[0m
+[32m15:19:39[0m | [36m       tts_model:259[0m | [1m    INFO[0m | [1mStart generating audio data from text:
+トランプ大統領とトルコのリッパ・テイップ・エルドアン大統領との電話会談後、発表が行われました。[0m
+[32m15:19:39[0m | [36m       tts_model:324[0m | [1m    INFO[0m | [1mAudio data generated successfully[0m
+[32m15:19:40[0m | [36m       tts_model:259[0m | [1m    INFO[0m | [1mStart generating audio data from text:
+あなた[0m
+[32m15:19:40[0m | [36m       tts_model:324[0m | [1m    INFO[0m | [1mAudio data generated successfully[0m
+[32m15:19:41[0m | [36m       tts_model:259[0m | [1m    INFO[0m | [1mStart generating audio data from text:
+ナビスの仕事は、あなたの国が人々と物資を移動する能力を維持し、同時に敵の能力を妨害することでした。[0m
+[32m15:19:41[0m | [36m       tts_model:324[0m | [1m    INFO[0m | [1mAudio data generated successfully[0m
+[32m15:19:42[0m | [36m       tts_model:259[0m | [1m    INFO[0m | [1mStart generating audio data from text:
+戦争が勃発した直後、英国はドイツに対して海軍の制限を開始しました。[0m
+[32m15:19:43[0m | [36m       tts_model:324[0m | [1m    INFO[0m | [1mAudio data generated successfully[0m
+[32m15:19:43[0m | [36m       tts_model:259[0m | [1m    INFO[0m | [1mStart generating audio data from text:
+漢と魏の間は60年でした。[0m
+[32m15:19:43[0m | [36m       tts_model:324[0m | [1m    INFO[0m | [1mAudio data generated successfully[0m
+[32m15:19:45[0m | [36m       tts_model:259[0m | [1m    INFO[0m | [1mStart generating audio data from text:
+欧州は、比較的狭い大陸ですが、多くの独立した国が存在します。通常の状況では、多国籍旅行を経験するためには、多次元签证申請とパスポート検査を何度も行う必要があります。[0m
+[32m15:19:45[0m | [36m             g2p:146[0m | [33m[1m WARNING[0m | [33m[1mCannot read: 签证 in:
+欧州は,比較的狭い大陸ですが,多くの独立した国が存在します.通常の状況では,多国籍旅行を経験するためには,多次元签证申請とパスポート検査を何度も行う必要があります., replaced with "'"[0m
+[32m15:19:45[0m | [36m             g2p:146[0m | [33m[1m WARNING[0m | [33m[1mCannot read: 签证 in:
+欧州は,比較的狭い大陸ですが,多くの独立した国が存在します.通常の状況では,多国籍旅行を経験するためには,多次元签证申請とパスポート検査を何度も行う必要があります., replaced with "'"[0m
+[32m15:19:46[0m | [36m       tts_model:324[0m | [1m    INFO[0m | [1mAudio data generated successfully[0m
